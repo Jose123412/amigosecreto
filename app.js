@@ -23,7 +23,7 @@ function agregarAmigo() {
     actualizarLista();
 }
 
-// Función para mostrar la lista de amigos en el HTML
+//mostrar la lista de amigos en html
 function actualizarLista() {
     const lista = document.getElementById('listaAmigos');
     lista.innerHTML = '';
@@ -35,39 +35,39 @@ function actualizarLista() {
     });
 }
 
-// Función para sortear el amigo secreto y mostrar el resultado
+// sortear el amigo secreto y mostrar el resultado
 function sortearAmigo() {
     if (amigos.length < 2) {
         alert('Agrega al menos dos amigos para hacer el sorteo.');
         return;
     }
 
-    // Crear un arreglo temporal para asignaciones
+    // crear un arreglo
     let asignaciones = {};
 
-    // Copiar el array original para manipular
+    // copiar el array original
     let amigosRestantes = [...amigos];
 
-    // Para cada amigo, asignar un amigo secreto diferente
+    //para cada amigo, asignar un amigo secreto diferente
     for (let i = 0; i < amigos.length; i++) {
         let posibles = amigosRestantes.filter(nombre => nombre !== amigos[i]);
         if (posibles.length === 0) {
-            // En caso extremo, reiniciar sorteo para evitar que alguien quede sin asignación
+            // reiniciar sorteo para evitar que alguien quede sin asignación solo en casos especialse
             return sortearAmigo();
         }
         let elegido = posibles[Math.floor(Math.random() * posibles.length)];
 
         asignaciones[amigos[i]] = elegido;
 
-        // Quitar elegido de amigosRestantes para no asignarlo otra vez
+        //quitar elegidos
         amigosRestantes = amigosRestantes.filter(nombre => nombre !== elegido);
     }
 
-    // Mostrar resultados
+    // mostrar resultados
     mostrarResultados(asignaciones);
 }
 
-// Función para mostrar el resultado del sorteo en pantalla
+// mostrar el resultado del sorteo en pantalla html
 function mostrarResultados(asignaciones) {
     const resultado = document.getElementById('resultado');
     resultado.innerHTML = '';
